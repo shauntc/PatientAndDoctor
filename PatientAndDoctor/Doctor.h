@@ -10,4 +10,6 @@
 
 @interface Doctor : NSObject
 
+@property (nonatomic, assign) int test;
+
 @end
