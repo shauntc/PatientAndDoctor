@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class Patient;
+
 @interface Doctor : NSObject
 
-@property (nonatomic, assign) int test;
+@property (nonatomic, strong) NSMutableDictionary *patients;
+
+-(BOOL)acceptPatient:(Patient *) patient;
+-(NSSet *)medicate:(NSSet*)symptoms patient:(Patient *)patient;
+
 
 @end
