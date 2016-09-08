@@ -11,6 +11,26 @@
 
 @implementation Patient
 
+
+- (instancetype)init
+{
+    self = [self initWithName:@"name" andAge:@"Age"];
+    return self;
+}
+
+- (instancetype)initWithName:(NSString *)name andAge:(NSString *)age
+{
+    self = [super init];
+    if (self) {
+        _prescriptions = [[NSSet alloc] init];
+        _currentSymptoms = [[NSMutableSet alloc] initWithArray:@[@"cough",@"other"]];
+        _name = name;
+        _age = age;
+        _hasValidHCC = YES;
+    }
+    return self;
+}
+
 -(void)visitDoctor:(Doctor *)doctor
 {
     if([doctor acceptPatient:self])
@@ -25,7 +45,18 @@
 
 -(void)requestMedication:(Doctor *)doctor
 {
-    self.prescriptions = [doctor medicate:_currentSymptoms patient:self];
+    _prescriptions = [doctor medicate:_currentSymptoms patient:self];
+}
+
+-(void)listPrescriptions
+{
+    NSString *temp = [NSString stringWithFormat:@"I'm %@ my prescriptions are", self.name];
+    
+    for(NSString *prescription in self.prescriptions)
+    {
+        temp = [temp stringByAppendingString:[NSString stringWithFormat:@" %@", prescription]];
+    }
+    NSLog(@"%@",temp);
 }
 
 

@@ -24,6 +24,7 @@
     self = [super init];
     if (self) {
         _medicalDictionary = @{@"cough":@"Cough Medicine", @"sore throat":@"Throat Medication", @"other":@"Other Medication"};
+        _patients = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -43,38 +44,33 @@
         NSLog(@"Doctor: Sorry you dont have health insurance");
         return NO;
     }
-    
-    
-    
 }
 
-
-//setter for patients to create a dictionary if it doesnt exist
--(void)setPatients:(NSMutableDictionary *)patients
+-(void)listPatients
 {
-    if(!_patients)
-    {
-        _patients = [[NSMutableDictionary alloc] init];
-    }
-    _patients = patients;
+    NSLog(@"%@",[_patients allKeys]);
 }
 
+
+
+//Medicates Patients
 -(NSSet *)medicate:(NSSet*)symptoms patient:(Patient *)patient
 {
     NSSet *prescriptions = [[NSSet alloc] init];
     
-    if(patient.hasValidHCC)
+    if(self.patients[patient.name])
     {
         
         for(NSString *symptom in symptoms)
         {
-            [prescriptions setByAddingObject:self.medicalDictionary[symptom]];
+            prescriptions = [prescriptions setByAddingObject:self.medicalDictionary[symptom]];
         }
         
         return prescriptions;
         
     }
     else{
+        NSLog(@"Doctor: You're not one of my patients %@", patient.name);
         return prescriptions;
     }
 }

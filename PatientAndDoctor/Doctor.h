@@ -15,6 +15,9 @@
 @property (nonatomic, strong) NSMutableDictionary *patients;
 
 -(BOOL)acceptPatient:(Patient *) patient;
+-(void)listPatients;
+
+//called when patient calls requestMedication
 -(NSSet *)medicate:(NSSet*)symptoms patient:(Patient *)patient;
 
 

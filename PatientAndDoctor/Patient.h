@@ -17,10 +17,13 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *age;
 @property (nonatomic, strong) NSMutableSet *currentSymptoms;
-@property (nonatomic, strong) NSSet *prescriptions;
+@property (readonly, nonatomic, strong) NSSet *prescriptions;
 @property (nonatomic, assign) BOOL hasValidHCC;
 
+- (instancetype)initWithName:(NSString *)name andAge:(NSString *)age;
 -(void)visitDoctor:(Doctor *)doctor;
+-(void)requestMedication:(Doctor *)doctor;
+-(void)listPrescriptions;
 
 
 @end
